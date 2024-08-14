@@ -1,20 +1,20 @@
 databases:
-  - name: mysitedb
+  - name: pl0xdb
     plan: free
-    databaseName: mysite
-    user: mysite
+    databaseName: pl0x
+    user: pl0x
 
 services:
   - type: web
     plan: free
-    name: mysite
+    name: pl0x
     runtime: python
     buildCommand: "./build.sh"
     startCommand: "python -m gunicorn pplox_web.asgi:application -k uvicorn.workers.UvicornWorker"    
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysitedb
+          name: pl0xdb
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
