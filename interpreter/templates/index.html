@@ -1,0 +1,14 @@
+<form action="/interpreter/runcode/" method="post">{% csrf_token %}
+    <label for="team_name">Enter name: </label>
+    <textarea
+      id="team_name"
+      type="text"
+      name="code"
+      value="Default name for team.">
+    </textarea>
+    <input type="submit" value="OK" />
+  </form>
+  <div>  
+    {{ output }}
+  </div>
+  
