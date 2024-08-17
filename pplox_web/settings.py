@@ -37,6 +37,12 @@ SECURE_SSL_REDIRECT = False if os.getenv("PPLOX_WEB_SECURE_SSL_REDIRECT", defaul
 SESSION_COOKIE_SECURE = False if os.getenv("PPLOX_WEB_SESSION_COOKIE_SECURE", default=True) == "False" else True
 CSRF_COOKIE_SECURE = False if os.getenv("PPLOX_WEB_CSRF_COOKIE_SECURE", default=True) == "False" else True
 
+# Debug
+print(f"{SECURE_SSL_REDIRECT=}")
+print(f"{SESSION_COOKIE_SECURE=}")
+print(f"{CSRF_COOKIE_SECURE=}")
+
+
 ALLOWED_HOSTS = ["pl0x.onrender.com",
                  "127.0.0.1",
                  "localhost",]
