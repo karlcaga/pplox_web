@@ -85,5 +85,5 @@ jobs:
             docker stop pplox_web || true
             docker rm pplox_web || true
             docker pull ghcr.io/karlcaga/pplox_web:main
-            docker run -dt --restart unless-stopped -p 80:8000 --env-file .env --name pplox_web ghcr.io/karlcaga/pplox_web:main
+            docker run -dt --restart unless-stopped -p 80:8000 --env-file /home/karlkidkid_85/.env --name pplox_web ghcr.io/karlcaga/pplox_web:main
             docker image prune -f
