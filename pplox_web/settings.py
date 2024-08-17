@@ -89,7 +89,7 @@ DATABASES = {
     )
 }
 
-DATABASES['default'] = DATABASES['dev' if DEBUG else 'production']
+DATABASES['default'] = DATABASES['dev' if DEBUG else 'prod']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
