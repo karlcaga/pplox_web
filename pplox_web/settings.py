@@ -94,7 +94,8 @@ WSGI_APPLICATION = 'pplox_web.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+HOST = os.getenv("PPLOX_WEB_HOST", default=None)
+print(f"{HOST=}")
 DATABASES = {
     'dev': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -106,7 +107,7 @@ DATABASES = {
     )
 }
 
-DATABASES['default'] = DATABASES['dev' if DEBUG else 'prod']
+DATABASES['default'] = DATABASES['prod' if HOST=="RENDER" else 'dev']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

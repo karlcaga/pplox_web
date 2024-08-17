@@ -8,3 +8,11 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
+
+## Configuring environment variables
+- PPLOX_WEB_SECRET_KEY
+- PPLOX_WEB_DEBUG
+- PPLOX_WEB_SECURE_SSL_REDIRECT
+- PPLOX_WEB_SESSION_COOKIE_SECURE
+- PPLOX_WEB_CSRF_COOKIE_SECURE
+- PPLOX_WEB_HOST
