@@ -41,7 +41,7 @@ CSRF_COOKIE_SECURE = False if os.getenv("PPLOX_WEB_CSRF_COOKIE_SECURE", default=
 print(f"{SECURE_SSL_REDIRECT=}")
 print(f"{SESSION_COOKIE_SECURE=}")
 print(f"{CSRF_COOKIE_SECURE=}")
-
+print(f"{DEBUG=}")
 
 ALLOWED_HOSTS = ["pl0x.onrender.com",
                  "127.0.0.1",
