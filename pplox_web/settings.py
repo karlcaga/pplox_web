@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,14 +23,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tm(69y@-%oa$#dngrs)#muz7wdni$-)ei=(ni6(@3age&_anr3'
+SECRET_KEY = os.getenv("PPLOX_WEB_SECRET_KEY", default='')
+if not SECRET_KEY:
+    print("Secret key not set. Please set the environment variable PPLOX_WEB_SECRET_KEY", file=sys.stderr)
+    exit(1)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("PPLOX_WEB_DEBUG", default=False)
+
+# Security Settings
+# python manage.py check --deploy will complain about HSTS but we don't want it
+SECURE_SSL_REDIRECT = False if os.getenv("PPLOX_WEB_SECURE_SSL_REDIRECT", default=True) == "False" else True
+SESSION_COOKIE_SECURE = False if os.getenv("PPLOX_WEB_SESSION_COOKIE_SECURE", default=True) == "False" else True
+CSRF_COOKIE_SECURE = False if os.getenv("PPLOX_WEB_CSRF_COOKIE_SECURE", default=True) == "False" else True
 
 ALLOWED_HOSTS = ["pl0x.onrender.com",
-                 "127.0.0.1",]
-
+                 "127.0.0.1",
+                 "localhost",]
 
 # Application definition
 
