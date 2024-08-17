@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-tm(69y@-%oa$#dngrs)#muz7wdni$-)ei=(ni6(@3age&_anr3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["pl0x.onrender.com"]
+ALLOWED_HOSTS = ["pl0x.onrender.com",
+                 "127.0.0.1",]
 
 
 # Application definition
@@ -78,12 +79,17 @@ WSGI_APPLICATION = 'pplox_web.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
+    'dev': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'prod': dj_database_url.config(
         default='postgresql://postgres:postgres@localhost:5432/pl0x',
         conn_max_age=600    
     )
 }
 
+DATABASES['default'] = DATABASES['dev' if DEBUG else 'production']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
