@@ -6,4 +6,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 EXPOSE 8000
-CMD ["gunicorn", "--access-logfile", "-", "pplox_web.wsgi"]
+CMD ["gunicorn", "--access-logfile", "-", "-b", "0.0.0.0:8000", "pplox_web.wsgi"]
