@@ -1,10 +1,9 @@
 <form action="/interpreter/runcode/" method="post">{% csrf_token %}
-    <label for="team_name">Enter code: </label>
+    <label for="code-text">Enter code: </label>
     <textarea
-      id="team_name"
+      id="code-text"
       type="text"
-      name="code"
-      value="Default name for team.">
+      name="code">
     </textarea>
     <input type="submit" value="OK" />
   </form>
