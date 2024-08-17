@@ -45,7 +45,8 @@ print(f"{CSRF_COOKIE_SECURE=}")
 
 ALLOWED_HOSTS = ["pl0x.onrender.com",
                  "127.0.0.1",
-                 "localhost",]
+                 "localhost",
+                 "34.170.207.9",]
 
 # Application definition
 
