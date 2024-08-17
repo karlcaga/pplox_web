@@ -39,6 +39,7 @@ CSRF_COOKIE_SECURE = False if os.getenv("PPLOX_WEB_CSRF_COOKIE_SECURE", default=
 
 # Debug
 print(f"{SECURE_SSL_REDIRECT=}")
+print(f"{os.getenv("PPLOX_WEB_SECURE_SSL_REDIRECT", default=True)=}")
 print(f"{SESSION_COOKIE_SECURE=}")
 print(f"{CSRF_COOKIE_SECURE=}")
 
