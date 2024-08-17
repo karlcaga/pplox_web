@@ -22,8 +22,6 @@ dist
 *.egg/
 *.pyc
 *.swp
-*/temp*
-*/*/temp*
 docker
 .vagrant
 .data
