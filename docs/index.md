@@ -1,7 +1,5 @@
 # Welcome to pplox_web! 
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
-
 ## Commands
 ### Running Locally
 * `pip install -r requirements.txt` - Install dependencies.

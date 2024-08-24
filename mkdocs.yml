@@ -1,1 +1,8 @@
-site_name: My Docs
+site_name: pplox_web
+site_url: https://pplox-web.readthedocs.io/en/latest/
+theme:
+  name: material
+
+plugins:
+  - blog
+  
