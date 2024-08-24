@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from pplox.scanner import Scanner
+from pplox.parser import Parser
+from pplox.ast_printer import AstPrinter
 
 # Create your views here.
 def index(request):
@@ -12,7 +14,14 @@ def runcode(request):
     if request.method == 'POST':
         scanner = Scanner(request.POST.get("code"))
         output = ""
-        for token in scanner.scan_tokens():
+        tokens = scanner.scan_tokens()
+        for token in tokens:
             output += token.to_string()
+        try:
+            parser = Parser(tokens)
+            expr = parser.parse()
+            output += AstPrinter().print(expr)
+        except:
+            output += "Failed to parse"
         context = {"output" : output}
         return render(request, 'index.html', context=context)
