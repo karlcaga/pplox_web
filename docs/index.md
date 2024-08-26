@@ -8,6 +8,23 @@
 ### Running with Docker
 * `docker run ghcr.io/karlcaga/pplox_web:main` - Pulls and runs the pplox_web container.
 
+## Structure
+```
+pplox_web       # Django project 
+    settings.py # The project configuration (Secrets, database, security, etc.)
+    urls.py     # This routes to the apps in the project
+    ...         # Auto-generated server configuration
+
+interpreter     # The Django app
+    urls.py     # Maps URLs to function views
+    views.py    # Defines functions to handle HTTP requests and return responses
+    ...         # Auto-generated modules for unused features
+
+docs            # Project documentation
+    index.md    # This page 
+    blog/posts/ # Changelogs
+```
+
 ## Deployments
 ### Render <https://pl0x.onrender.com> 
 
