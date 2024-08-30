@@ -17,18 +17,18 @@ def runcode(request):
         output = ""
         tokens = scanner.scan_tokens()
         for token in tokens:
-            output += token.to_string()
+            output += token.to_string() + "\n"
         try:
             parser = Parser(tokens)
             expr = parser.parse()
-            output += AstPrinter().print(expr)
+            output += AstPrinter().print(expr) + "\n"
             try:
                 interpreter = Interpreter()
-                output += to_string(interpreter.evaluate(expr))
+                output += to_string(interpreter.evaluate(expr)) + "\n"
             except:
-                output += "Failed to evaluate"
-        except ParseError:
-            output += "Failed to parse"
+                output += "Failed to evaluate\n" 
+        except:
+            output += "Failed to parse\n"
         context = {"output" : output}
         return render(request, 'index.html', context=context)
     
