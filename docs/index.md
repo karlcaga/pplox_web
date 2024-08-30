@@ -10,19 +10,20 @@
 
 ## Structure
 ```
-pplox_web       # Django project 
-    settings.py # The project configuration (Secrets, database, security, etc.)
-    urls.py     # This routes to the apps in the project
-    ...         # Auto-generated server configuration
+pplox_web                # Django project 
+    settings.py          # The project configuration (Secrets, database, security, etc.)
+    urls.py              # This routes to the apps in the project
+    ...                  # Auto-generated server configuration
 
-interpreter     # The Django app
-    urls.py     # Maps URLs to function views
-    views.py    # Defines functions to handle HTTP requests and return responses
-    ...         # Auto-generated modules for unused features
+interpreter              # The Django app
+    urls.py              # Maps URLs to function views
+    views.py             # Defines functions to handle HTTP requests and return responses
+    templates/index.html # Template for code entry and interpreter output
+    ...                  # Auto-generated modules for unused features
 
-docs            # Project documentation
-    index.md    # This page 
-    blog/posts/ # Changelogs
+docs                     # Project documentation
+    index.md             # This page 
+    blog/posts/          # Changelogs
 ```
 
 ## Deployments
