@@ -13,22 +13,20 @@ def index(request):
 
 def runcode(request):
     if request.method == 'POST':
-        scanner = Scanner(request.POST.get("code"))
+        scanner = Scanner(request.POST.get("code") + ";")
         output = ""
         tokens = scanner.scan_tokens()
         for token in tokens:
             output += token.to_string() + "\n"
-        try:
-            parser = Parser(tokens)
-            expr = parser.parse()
-            output += AstPrinter().print(expr) + "\n"
+        parser = Parser(tokens)
+        statements = parser.parse()
+        for i, statement in enumerate(statements):
             try:
+                output += AstPrinter().print(statement.expression) + "\n"
                 interpreter = Interpreter()
-                output += to_string(interpreter.evaluate(expr)) + "\n"
+                output += to_string(interpreter.evaluate(statement.expression)) + "\n"
             except:
-                output += "Failed to evaluate\n" 
-        except:
-            output += "Failed to parse\n"
+                output += "Could not print statement " + str(i+1) + ".\n"
         context = {"output" : output}
         return render(request, 'index.html', context=context)
     
