@@ -1,0 +1,16 @@
+[Unit]
+Description=Gunicorn instance to serve pplox-web
+After=network.target
+
+[Service]
+User=YOUR_USER
+Group=www-data
+WorkingDirectory=/pplox-web/
+ExecStart=/pplox-web/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/pplox_web.sock \
+          pplox_web.wsgi
+
+[Install]
+WantedBy=multi-user.target
