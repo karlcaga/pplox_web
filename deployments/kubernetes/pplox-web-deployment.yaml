@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pplox-web-app
+  labels:
+    app: pplox-web
+spec:
+	replicas: 2
+  selector:
+    matchLabels:
+      app: pplox-web
+  template:
+    metadata:
+      labels:
+        app: pplox-web
+    spec:
+      containers:
+        - image: ghcr.io/karlcaga/pplox_web:main
+          name: pplox-web
+          envFrom:
+          - secretRef:
+              name: pplox-web-secret
+          ports:
+            - containerPort: 8000
+              name: gunicorn
