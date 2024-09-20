@@ -22,10 +22,9 @@ python manage.py runserver
 We support deploying on a Linux VPS, Docker, and Kubernetes.
 
 ### Linux
-Install `python`, `pip`, and `venv` using 
-
+Install `python`, `pip`, `venv`, and `nginx` using 
 ```bash
-apt install python3 python3-pip python3-venv
+apt install python3 python3-pip python3-venv nginx
 ```
 
 Install pplox web from git and installing its dependencies 
@@ -60,12 +59,12 @@ WantedBy=multi-user.target
 
 Start the `pplox-web` service with systemd
 ```bash
-systemctl start pplox-web
-systemctl enable pplox-web
+systemctl start pplox_web
+systemctl enable pplox_web
 ```
 
 In `/etc/nginx/sites-available/pplox-web` add the following contents
-```
+```bash
 server {
     listen 80;
     server_name server_domain_or_IP;
@@ -73,12 +72,13 @@ server {
     location / {
         include proxy_params;
         proxy_pass http://unix:/run/pplox_web.sock;
+    }
 }
 ```
 
 Save the file and enable it by linking it to the `sites-enabled` directory
 ```bash
-ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled
+ln -s /etc/nginx/sites-available/pplox-web /etc/nginx/sites-enabled
 ```
 
 Restart Nginx with
