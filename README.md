@@ -17,3 +17,9 @@ python manage.py runserver
 - `PPLOX_WEB_SESSION_COOKIE_SECURE` Set to False to disable session cookies, otherwise True
 - `PPLOX_WEB_CSRF_COOKIE_SECURE` Set to False to disable CSRF cookies, otherwise True
 - `PPLOX_WEB_HOST` Set to RENDER if hosting on Render
+
+## Deployments
+
+### Docker
+You can deploy pplox web on a Docker container using `docker run -dt --restart unless-stopped -p 80:8000 --env-file .env --name pplox_web ghcr.io/karlcaga/pplox_web:main`.
+The `.env` file must contain value for `PPLOX_WEB_SECRET_KEY`.
