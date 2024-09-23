@@ -24,12 +24,12 @@ We support deploying on a Linux VPS, Docker, and Kubernetes.
 ### Linux
 Install `python`, `pip`, `venv`, and `nginx` using 
 ```bash
-apt install python3 python3-pip python3-venv nginx
+sudo apt update && sudo apt install python3 python3-pip python3-venv nginx
 ```
 
 Install pplox web from git and installing its dependencies 
 ```bash
-mkdir /pplox-web
+sudo mkdir /pplox-web
 cd /pplox-web/
 git clone https://github.com/karlcaga/pplox_web.git .
 python3 -m venv venv
@@ -37,7 +37,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Create a systemd service file in `/etc/systemd/system/pplox_web.service` for pplox-web with the contents:
+Create a systemd service file `/etc/systemd/system/pplox_web.service` for pplox-web with the contents:
 ```ini
 [Unit]
 Description=Gunicorn instance to serve pplox-web
@@ -50,17 +50,28 @@ WorkingDirectory=/pplox-web/
 ExecStart=/pplox-web/venv/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
-          --bind unix:/run/pplox_web.sock \
+          --bind localhost:8000 \
           pplox_web.wsgi
 
 [Install]
 WantedBy=multi-user.target
 ```
 
+Set the environment variables `sudo systemctl edit pplox_web` and add the following environment variables
+```bash
+[Service]
+Environment="PPLOX_WEB_DEBUG=False"
+Environment="PPLOX_WEB_SECRET_KEY=🤫"
+Environment="PPLOX_WEB_SECURE_SSL_REDIRECT=False"
+Environment="PPLOX_WEB_SESSION_COOKIE_SECURE=False"
+Environment="PPLOX_WEB_CSRF_COOKIE_SECURE=True"
+Environment="PPLOX_WEB_EXTRA_HOSTS=YOUR_HOSTNAME"
+```
+
 Start the `pplox-web` service with systemd
 ```bash
-systemctl start pplox_web
-systemctl enable pplox_web
+sudo systemctl start pplox_web
+sudo systemctl enable pplox_web
 ```
 
 In `/etc/nginx/sites-available/pplox-web` add the following contents
@@ -71,7 +82,7 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/run/pplox_web.sock;
+        proxy_pass http://localhost:8000;
     }
 }
 ```
@@ -85,7 +96,6 @@ Restart Nginx with
 ```bash
 systemctl restart nginx
 ```
-
 
 ### Docker
 You can deploy pplox web on a Docker container using `docker run -dt --restart unless-stopped -p 80:8000 --env-file .env --name pplox_web ghcr.io/karlcaga/pplox_web:main`.
