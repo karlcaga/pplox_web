@@ -27,7 +27,7 @@ Install `python`, `pip`, `venv`, and `nginx` using
 sudo apt update && sudo apt install python3 python3-pip python3-venv nginx
 ```
 
-Install pplox web from git and installing its dependencies 
+Install pplox web from git and install its dependencies 
 ```bash
 sudo mkdir /pplox-web
 cd /pplox-web/
@@ -57,7 +57,7 @@ ExecStart=/pplox-web/venv/bin/gunicorn \
 WantedBy=multi-user.target
 ```
 
-Set the environment variables `sudo systemctl edit pplox_web` and add the following environment variables
+Set the environment variables `sudo systemctl edit pplox_web` and add the following
 ```bash
 [Service]
 Environment="PPLOX_WEB_DEBUG=False"
