@@ -4,6 +4,6 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/run/pplox_web.sock;
+        proxy_pass localhost:8000;
     }
 }

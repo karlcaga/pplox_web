@@ -57,7 +57,7 @@ ExecStart=/pplox-web/venv/bin/gunicorn \
 WantedBy=multi-user.target
 ```
 
-Set the environment variables `sudo systemctl edit pplox_web` and add the following
+Set the environment variables `sudo systemctl edit pplox_web` and add
 ```bash
 [Service]
 Environment="PPLOX_WEB_DEBUG=False"
@@ -74,7 +74,7 @@ sudo systemctl start pplox_web
 sudo systemctl enable pplox_web
 ```
 
-In `/etc/nginx/sites-available/pplox-web` add the following contents
+In `/etc/nginx/sites-available/pplox-web` add
 ```bash
 server {
     listen 80;
