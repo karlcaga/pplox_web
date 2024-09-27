@@ -17,6 +17,7 @@ python manage.py runserver
 - `PPLOX_WEB_SESSION_COOKIE_SECURE` Set to False to disable session cookies, otherwise True
 - `PPLOX_WEB_CSRF_COOKIE_SECURE` Set to False to disable CSRF cookies, otherwise True
 - `PPLOX_WEB_HOST` Set to RENDER if hosting on Render
+- `PPLOX_WEB_EXTRA_HOSTS` Set this to your domain or IP
 
 ## Deployments
 We support deploying on a Linux VPS, Docker, and Kubernetes.
@@ -57,7 +58,7 @@ ExecStart=/pplox-web/venv/bin/gunicorn \
 WantedBy=multi-user.target
 ```
 
-Set the environment variables `sudo systemctl edit pplox_web` and add
+Set the environment variables with `sudo systemctl edit pplox_web` and add
 ```bash
 [Service]
 Environment="PPLOX_WEB_DEBUG=False"
