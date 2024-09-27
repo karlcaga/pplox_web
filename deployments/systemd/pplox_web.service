@@ -9,7 +9,7 @@ WorkingDirectory=/pplox-web/
 ExecStart=/pplox-web/venv/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
-          --bind unix:/run/pplox_web.sock \
+          --bind http://localhost:8000 \
           pplox_web.wsgi
 
 [Install]
