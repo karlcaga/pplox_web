@@ -43,10 +43,11 @@ print(f"{SESSION_COOKIE_SECURE=}")
 print(f"{CSRF_COOKIE_SECURE=}")
 print(f"{DEBUG=}")
 
+EXTRA_HOSTS = [] if os.getenv("PPLOX_WEB_EXTRA_HOSTS", default="") == "" else [os.getenv("PPLOX_WEB_EXTRA_HOSTS")]
 ALLOWED_HOSTS = ["pl0x.onrender.com",
                  "127.0.0.1",
                  "localhost",
-                 "34.170.207.9",]
+                 "34.170.207.9",] + EXTRA_HOSTS
 
 # Application definition
 
