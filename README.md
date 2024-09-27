@@ -20,7 +20,7 @@ python manage.py runserver
 - `PPLOX_WEB_EXTRA_HOSTS` Set this to your domain or IP
 
 ## Deployments
-We support deploying on a Linux VPS, and Docker.
+We support deploying on a Linux VPS, Docker, and Kubernetes.
 
 ### Linux
 Install `python`, `pip`, `venv`, and `nginx` using 
@@ -101,3 +101,66 @@ systemctl restart nginx
 ### Docker
 You can deploy pplox web on a Docker container using `docker run -dt --restart unless-stopped -p 80:8000 --env-file .env --name pplox_web ghcr.io/karlcaga/pplox_web:main`.
 The `.env` file must contain value for `PPLOX_WEB_SECRET_KEY`.
+
+### Kubernetes
+Make a secrets file `pplox-web-secrets` containing the `PPLOX_WEB_SECRET_KEY` variable.
+Create the secret in the cluster using 
+```bash
+kubectl create secret generic pplox-web-secret --from-env-file=pplox-web-secrets
+```
+
+Make the deployment `pplox-web-deployment.yaml` with the following contents:
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pplox-web-app
+  labels:
+    app: pplox-web
+spec:
+	replicas: 2
+  selector:
+    matchLabels:
+      app: pplox-web
+  template:
+    metadata:
+      labels:
+        app: pplox-web
+    spec:
+      containers:
+        - image: ghcr.io/karlcaga/pplox_web:main
+          name: pplox-web
+          envFrom:
+          - secretRef:
+              name: pplox-web-secret
+          ports:
+            - containerPort: 8000
+              name: gunicorn
+```
+
+Create the Deployment using 
+```bash
+kubectl apply -f pplox-web-deployment.yaml
+```
+
+Create service `pplox-web-service.yaml` with the contents
+```yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: pplox-web
+  labels:
+    app: pplox-web
+spec:
+  type: NodePort
+  selector:
+    app: pplox-web
+  ports:
+    - port: 8000
+      targetPort: 8000
+```
+
+Apply the Service using
+```bash
+kubectl apply -f pplox-web-service.yaml
+```
