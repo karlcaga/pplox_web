@@ -1,4 +1,4 @@
-pplox_web is an Django web application that lets you run the pplox interpreter over the web.
+pplox_web is an Django web application that lets you run the [pplox interpreter](https://github.com/karlcaga/pplox) over the web.
 Use it at https://pl0x.onrender.com.
 Documentation can be found at https://karlcaga.github.io/pplox_web/
 
